@@ -8,7 +8,7 @@ Define a new operation over the object structure without changing the classes of
 elements on which it operates, while in the meantime, allow the element classes in the
 object structure to be extended constantly without changing the existing system.
 
-![Reflective_Visitor]('./Diagram/Class Model.png' "Reflective Visitor")
+![Reflective_Visitor](https://raw.githubusercontent.com/milton-lopez/Reflective-Visitor-Pattern/master/Diagram/Class%20Model.png "Reflective Visitor")
 
 ## Pros
 * Cyclic dependencies are broken.
