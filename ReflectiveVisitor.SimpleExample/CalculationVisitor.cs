@@ -7,80 +7,49 @@ namespace ReflectiveVisitor.SimpleExample
     {
         public int Result { get; protected set; }
 
-        protected void Evaluate(Variable variable)
-        {
+        protected void Evaluate(Variable variable) =>
             Result = variable.Value;
-        }
 
-        protected void Evaluate(Constant constant)
-        {
+        protected void Evaluate(Constant constant) =>
             Result = constant.Value;
-        }
 
         protected void Evaluate(AdditionExpression addition)
         {
-            var left = addition.Left;
-            var right = addition.Right;
-
-            Visit(left);
-
+            Visit(addition.Left);
             var leftResult = Result;
-
-            Visit(right);
-
-            Result += leftResult; 
+            Visit(addition.Right);
+            Result += leftResult;
         }
 
         protected void Evaluate(SubtractionExpression subtraction)
         {
-            var left = subtraction.Left;
-            var right = subtraction.Right;
-
-            Visit(left);
-
+            Visit(subtraction.Left);
             var leftResult = Result;
-
-            Visit(right);
-
+            Visit(subtraction.Right);
             Result = leftResult - Result;
         }
 
         protected void Evaluate(MultiplicationExpression multiplication)
         {
-            var left = multiplication.Left;
-            var right = multiplication.Right;
-
-            Visit(left);
-
+            Visit(multiplication.Left);
             var leftResult = Result;
-
-            Visit(right);
-
+            Visit(multiplication.Right);
             Result *= leftResult;
         }
 
         protected void Evaluate(DivisionExpression division)
         {
-            var left = division.Left;
-            var right = division.Right;
-
-            Visit(left);
-
+            Visit(division.Left);
             var leftResult = Result;
-
-            Visit(right);
-
+            Visit(division.Right);
             Result = leftResult / Result;
         }
 
         protected void Evaluate(Assignment assignment)
         {
-            var lValue = assignment.LValue;
-            var rValue = assignment.RValue;
+            Visit(assignment.RValue);
 
-            Visit(rValue);
-
-            if (lValue is Variable variable)
+            if (assignment.LValue is Variable variable)
                 variable.Value = Result;
         }
     }

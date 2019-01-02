@@ -7,83 +7,49 @@ namespace ReflectiveVisitor.SimpleExample
     {
         public string Equation { get; protected set; }
 
-        protected void Evaluate(Variable variable)
-        {
+        protected void Evaluate(Variable variable) =>
             Equation = variable.Name;
-        }
 
-        protected void Evaluate(Constant constant)
-        {
+        protected void Evaluate(Constant constant) =>
             Equation = constant.Value.ToString();
-        }
 
         protected void Evaluate(AdditionExpression addition)
         {
-            var left = addition.Left;
-            var right = addition.Right;
-
-            Visit(left);
-
+            Visit(addition.Left);
             var tempEquation = "(" + Equation + " + ";
-
-            Visit(right);
-
+            Visit(addition.Right);
             Equation = tempEquation + Equation + ")";
         }
 
         protected void Evaluate(SubtractionExpression subtraction)
         {
-            var left = subtraction.Left;
-            var right = subtraction.Right;
-
-            Visit(left);
-
+            Visit(subtraction.Left);
             var tempEquation = "(" + Equation + " - ";
-
-            Visit(right);
-
+            Visit(subtraction.Right);
             Equation = tempEquation + Equation + ")";
         }
 
         protected void Evaluate(MultiplicationExpression multiplication)
         {
-            var left = multiplication.Left;
-            var right = multiplication.Right;
-
-            Visit(left);
-
+            Visit(multiplication.Left);
             var tempEquation = "(" + Equation + " * ";
-
-            Visit(right);
-
+            Visit(multiplication.Right);
             Equation = tempEquation + Equation + ")";
         }
 
         protected void Evaluate(DivisionExpression division)
         {
-            var left = division.Left;
-            var right = division.Right;
-
-            Visit(left);
-
+            Visit(division.Left);
             var tempEquation = "(" + Equation + " / ";
-
-            Visit(right);
-
+            Visit(division.Right);
             Equation = tempEquation + Equation + ")";
         }
 
         protected void Evaluate(Assignment assignment)
         {
-            var lValue = assignment.LValue;
-            var rValue = assignment.RValue;
-
-            Visit(lValue);
-
+            Visit(assignment.LValue);
             var tempEquation = Equation + " = ";
-
-            Visit(rValue);
-
+            Visit(assignment.RValue);
             Equation = tempEquation + Equation;
         }
     }
